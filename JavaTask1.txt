@@ -13,15 +13,17 @@ public class Main
  int n = input.nextInt();
  // Check if the numbers are in order so far
  if (i > 0 && n < latestValue) {
+           // if it conflict print why?
+           System.out.println("Conflict: " + n + " < " + latestValue );
            conflicts++;
  }
- latestValue=n;
+ latestValue=n; 
  }
  // Print the result
  if (conflicts == 0) {
- System.out.println("Congrats. All number are ordered.");
+ System.out.println("Mohammed Seleim say! Congrats. All number are ordered.");
  } else {
- System.out.println("Unfortunately, you have " + conflicts + " conflicts.");
+ System.out.println("Mohammed Seleim say! Unfortunately, you have " + conflicts + " conflicts.");
  }
  }
 }
