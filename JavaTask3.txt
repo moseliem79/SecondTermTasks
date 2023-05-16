@@ -1,0 +1,94 @@
+//Task- 3 Mohammed Mohammed Haasn Seliem code: 202201271
+/*
+(Rectangle Class) Greate a class Rectangle with attributes Lenth and Width, each of which defaults to 1. Provide a No-Argument constructor and anther constructor that initializes the two instance variables.  provide a set and a get method for each instance variable. Provide methods that calculate the rectangles perimeter and area. it has set and get methods for both Length point number larger than 0.0 and less than 20.0 (these two values must be declared constants)   Write a program to test class Rectangle.
+*/ 
+public class Rectangle {
+    private static final double MIN_LENGTH = 0.0;
+    private static final double MAX_LENGTH = 20.0;
+
+    private double length;
+    private double width;
+
+    // No-Argument constructor
+    public Rectangle() {
+        this.length = 1.0;
+        this.width = 1.0;
+    }
+
+    // Constructor with parameters to initialize length and width
+    public Rectangle(double length, double width) {
+        setLength(length);
+        setWidth(width);
+    }
+
+    // Setters and getters for length
+    public void setLength(double length) {
+        if (length >= MIN_LENGTH && length <= MAX_LENGTH) {
+            this.length = length;
+        } else {
+            throw new IllegalArgumentException("Length must be between " + MIN_LENGTH + " and " + MAX_LENGTH);
+        }
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    // Setters and getters for width
+    public void setWidth(double width) {
+        if (width >= MIN_LENGTH && width <= MAX_LENGTH) {
+            this.width = width;
+        } else {
+            throw new IllegalArgumentException("Width must be between " + MIN_LENGTH + " and " + MAX_LENGTH);
+        }
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    // Calculate perimeter
+    public double calculatePerimeter() {
+        return 2 * (length + width);
+    }
+
+    // Calculate area
+    public double calculateArea() {
+        return length * width;
+    }
+}
+/*
+In this implementation, the Rectangle class has two instance variables: length and width. The class provides a no-argument constructor that sets the default values for length and width to 1.0. It also has a constructor with parameters to initialize the length and width with custom values.
+
+The class includes setters and getters for both length and width attributes. The setters validate that the provided values are within the range defined by the MIN_LENGTH and MAX_LENGTH constants (0.0 and 20.0, respectively).
+
+The Rectangle class also provides two methods: calculatePerimeter() and calculateArea(). These methods compute the perimeter and area of the rectangle, respectively, using the length and width values.
+
+*/
+
+//Here's an example program that tests the Rectangle class:
+public class Main {
+    public static void main(String[] args) {
+        Rectangle rectangle1 = new Rectangle();
+        System.out.println("Rectangle 1 - Length: " + rectangle1.getLength() + ", Width: " + rectangle1.getWidth());
+        System.out.println("Perimeter: " + rectangle1.calculatePerimeter());
+        System.out.println("Area: " + rectangle1.calculateArea());
+        System.out.println();
+
+        Rectangle rectangle2 = new Rectangle(5.0, 3.0);
+        System.out.println("Rectangle 2 - Length: " + rectangle2.getLength() + ", Width: " + rectangle2.getWidth());
+        System.out.println("Perimeter: " + rectangle2.calculatePerimeter());
+        System.out.println("Area: " + rectangle2.calculateArea());
+        System.out.println();
+
+        try {
+            Rectangle rectangle3 = new Rectangle(25.0, 2.0); // Trying to set an invalid length
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid length: " + e.getMessage());
+        }
+    }
+}
+
+/*
+In this example program, we create three instances of the Rectangle class: rectangle1 using the no-argument constructor, rectangle2 using the constructor with custom length and width, and rectangle3 with an
+*/
