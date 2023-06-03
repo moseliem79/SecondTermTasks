@@ -1,0 +1,151 @@
+class Point {
+    private int x;
+    private int y;
+
+    public Point() {
+        this(0, 0);
+    }
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public double distance(Point another) {
+        int deltaX = this.x - another.x;
+        int deltaY = this.y - another.y;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
+}
+
+class Circle {
+    private Point center;
+    private double radius;
+
+    public Circle() {
+        this(new Point(), 1.8);
+    }
+
+    public Circle(double radius) {
+        this(new Point(), radius);
+    }
+
+    public Circle(int xCenter, int yCenter, double radius) {
+        this(new Point(xCenter, yCenter), radius);
+    }
+
+    public Circle(Point center, double radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+
+    public Point getCenter() {
+        return this.center;
+    }
+
+    public void setCenter(Point center) {
+        this.center = center;
+    }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+
+    public double getCircumference() {
+        return 2.0 * Math.PI * radius;
+    }
+
+    public double distance(Circle another) {
+        return center.distance(another.center);
+    }
+
+    @Override
+    public String toString() {
+        return "Circle[center=" + center + ", radius=" + radius + "]";
+    }
+}
+
+class Cylinder extends Circle {
+    private double height;
+
+    public Cylinder(double radius, double height) {
+        super(radius);
+        this.height = height;
+    }
+
+    public Cylinder(int xCenter, int yCenter, double radius, double height) {
+        super(xCenter, yCenter, radius);
+        this.height = height;
+    }
+
+    public double getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getVolume() {
+        return getArea() * height;
+    }
+
+    @Override
+    public double getArea() {
+        double baseArea = super.getArea();
+        double baseCircumference = super.getCircumference();
+        return (baseCircumference * height) + (2 * baseArea);
+    }
+
+    @Override
+    public String toString() {
+        return "Cylinder[center=" + getCenter() + ", radius=" + getRadius() + ", height=" + height + "]";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        double baseCircumference = 10.0;
+        double height = 5.0;
+        double baseRadius = baseCircumference / (2 * Math.PI);
+        double baseArea = Math.PI * (baseRadius * baseRadius);
+
+        Cylinder cylinder = new Cylinder(baseRadius, height);
+        System.out.println("Cylinder:");
+        System.out.println("Base Circumference: " + baseCircumference);
+        System.out.println("Height: " + height);
+        System.out.println("Base Area: " + baseArea);
+        System.out.println("Volume: " + cylinder.getVolume());
+        System.out.println("Area: " + cylinder.getArea());
+        System.out.println(cylinder.toString());
+    }
+}
