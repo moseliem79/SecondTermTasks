@@ -1,0 +1,86 @@
+// Example program that demonstrates the polymorphism aspects:
+
+class Point {
+    private int x;
+    private int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
+}
+
+class Shape {
+    private String color;
+    private Point position;
+
+    public Shape(Point position, String color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public double getArea() {
+        System.err.println("Shape unknown! Cannot compute area!");
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Shape[position=%s, color=%s]", position, color);
+    }
+}
+
+class TwoDimensionalShape extends Shape {
+    public TwoDimensionalShape(Point position, String color) {
+        super(position, color);
+    }
+
+    public double getPerimeter() {
+        System.err.println("Shape unknown! Cannot compute perimeter!");
+        return 0;
+    }
+}
+
+class Circle extends TwoDimensionalShape {
+    private double radius;
+
+    public Circle(Point position, String color, double radius) {
+        super(position, color);
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * (radius * radius);
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Circle{radius=%f, %s}", radius, super.toString());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Point position = new Point(0, 0);
+        String color = "red";
+        double radius = 5.0;
+
+        Circle circle = new Circle(position, color, radius);
+        TwoDimensionalShape shapeReference = circle;
+
+        System.out.println(shapeReference.toString());
+        System.out.println("Area: " + shapeReference.getArea());
+        System.out.println("Perimeter: " + shapeReference.getPerimeter());
+    }
+}
